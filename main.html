@@ -6,10 +6,11 @@
     <title>회원제 게시판</title>
 </head>
 <body>
-    <form action="login.php" method="POST">
-        <input type="text" id="id">
-        <input type="password" id="password">
+    <form action="./database/login.php" method="POST">
+        <input type="text" name="id" placeholder="id" required>
+        <input type="password" name="password" placeholder="password" required><br>
         <input type="submit" value="로그인">
     </form>
+    <a href="memberjoin.html">회원가입</a>
 </body>
 </html>
