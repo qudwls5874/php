@@ -67,10 +67,6 @@ function joinForm_ck() {
     var pw_ck_sp = document.getElementById("pw_ck_sp").innerHTML;
     var pw_ck_sp2 = document.getElementById("pw_ck_sp2").innerHTML;
     var name_ck_sp = document.getElementById("name_ck_sp").innerHTML;
-    console.log("id_ck_sp 값: ",id_ck_sp);
-    console.log("pw_ck_sp 값: ",pw_ck_sp);
-    console.log("pw_ck_sp2 값: ",pw_ck_sp2);
-    console.log("name_ck_sp 값: ",name_ck_sp);
 	if(id_ck_sp == "사용가능 합니다." && pw_ck_sp == "가능한 비밀번호입니다." && pw_ck_sp2=="일치합니다." && name_ck_sp =="가능한 이름(별명)입니다."){
 		joinForm.submit();
 	}else{

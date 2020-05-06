@@ -9,14 +9,10 @@ $row = mysqli_fetch_array($result);
 
 if($row){
     echo "1";
-    // var_dump($row);
     print_r($row);
 }else{
     
 }
 
 
-
-
-//mysqli_query($conn,);
 ?>

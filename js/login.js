@@ -4,10 +4,15 @@ function login_btn(){
     $.ajax({
         type : "post",
 		url : "../database/id_check2.php",
-		data : {"id" : id},
-		dataType : "json",
+        data : {"id" : id,
+                "password" : password},
 		success : function(data){
+            if(data === "ok"){
+                location.href = '../mainpage.html';
+            }else{
+                alert(data);
+            }
             console.log(data);
-        }
+        } 
     })
 }
