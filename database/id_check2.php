@@ -9,8 +9,8 @@ if($password){
     $row = mysqli_fetch_array($result);
     if($row){
         if($row['PASSWORD']== $password){
-            $_SESSION["id"] = $id;
             session_start();
+            $_SESSION["id"] = $id;
             echo "ok";
             // print_r($_SESSION);
             // var_dump($_SESSION);

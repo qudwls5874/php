@@ -1,0 +1,23 @@
+<?php 
+include './database/session.php';
+$_GET["m"] = "view";
+include "./database/board.php";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>글작성란</h1>
+    <form action="database/board.php?m=insert" method="POST" id="view">
+        <input type="text" name="title" placeholder="제목"><br>
+        <input type="text" name="id" value="<?= $_SESSION['id']; ?>" readonly ><br>
+        <textarea name="content" placeholder="내용"></textarea><br>
+        <input type="submit" value="작성하기">
+    </form>
+    <a href="board.html">취소</a>
+</body>
+</html> 

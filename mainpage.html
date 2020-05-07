@@ -1,12 +1,22 @@
+<?php 
+include "./database/session.php"; 
+if(!isset($_SESSION['id'])) header('location:index.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="./js/member.js"></script>
     <title>mainpage</title>
 </head>
 <body>    
-    <h1>게시판</h1>
-    
+    <h1>MainPage</h1>
+    <h3><?= $_SESSION['id']; ?>님 반갑습니다.</h3><br>
+    <!-- <a href="./database/board.php?m=list">게시판 목록</a> -->
+    <a href="board.html">게시판 목록</a>
+    <a href="./database/member.php?m=out">로그아웃</a>
+    <button onclick="delete_btn(this)" value="<?= $_SESSION['id']; ?>">회원탈퇴</button>
 </body>
 </html>
