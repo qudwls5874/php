@@ -11,35 +11,15 @@ function veiw(d){
 }
 
 function veiw_m(d){
-    location.href="../";
-    // $.ajax({
-    //     type : "post",
-	// 	url : "../database/board.php?m=veiw",
-    //     data : {"NUMBER" : d.value,"view":"modify"},
-	// 	success : function(data){
-
-    //     }
-    // })
+    $.ajax({
+        type : "post",
+		url : "../database/board.php?m=veiw",
+        data : {"NUMBER" : d.value,"view":"modify"},
+		success : function(data){
+            $("#aa").html(data);
+        }
+    })
 }
-
-
-// function veiw_m(d){
-//     $.ajax({
-//         type : "post",
-// 		url : "../database/board.php?m=veiw",
-//         data : {"NUMBER" : d.value,"view":"modify"},
-// 		success : function(data){
-//             var output = '';
-//             var output ='<form action="database/board.php?m=insert" method="POST" id="view">';
-//             var output ='<input type="text" name="title" placeholder="제목"><br>'
-//             var output ='<input type="text" name="id" value="'+data[id]+'" readonly ><br>';
-//             var output ='<textarea name="content" placeholder="내용" value="'+data[content+'"></textarea><br>';
-//             var output ='<input type="submit" value="작성하기">';
-//             var output ='</form>';
-//             $("#view").html(output);
-//         }
-//     })
-// }
 
 function delete_btn(d){
     if(confirm("삭제 하시겠습니까??")){
@@ -53,4 +33,24 @@ function delete_btn(d){
             }
         })
     }
+}
+
+function modify(){
+    if(id.value != "" && title.value!= "" && content.value != "" ){
+        if(confirm("수정하시겠습니까??")){
+            $.ajax({
+                type : "post",
+                url : "../database/board.php?m=modify",
+                data : {"title":title.value,"content":content.value,"NUMBER":number.value},
+                success : function(d){
+                    alert(d);
+                    location.href = "board.html";
+                }
+            })
+        }
+    }else{
+        alert("빈칸을 모두 채워주세요");
+        return false;
+    }   
+    return false;
 }

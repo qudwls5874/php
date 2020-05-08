@@ -27,13 +27,34 @@ if(isset($_GET["m"])){
             $result  = mysqli_query($conn,$query);
             $row = mysqli_fetch_array($result);
             if($view === "modify"){
-                echo print_r($row) ;
+                $html = "<h1>글수정</h1><form method=\"POST\" id=\"view\" onsubmit=\"return false\">";
+                $html .= "<input type=\"hidden\" id=\"number\" value=\"".$row['NUMBER']."\"><br>";
+                $html .= "<input type=\"text\" id=\"title\" placeholder=\"제목\" value=\"".$row['title']."\"><br>";
+                $html .= "<input type=\"text\" id=\"id\" value=\"".$row['id']."\" readonly ><br>";
+                $html .= "<textarea id=\"content\" placeholder=\"내용\" value=\"".$row['content']."\">".$row['content']."</textarea><br>";
+                $html .= "<input type=\"submit\" onclick=\"modify()\" value=\"수정하기\">";
+                $html .= "</form><a href=\"board.html\">취소</a>";
+                // $html .= "</form><a href=\"board.html?page=".$page."\">닫기</a>";
+                echo $html;                
             }else{
                 echo print_r($row) ;
             }
-            
+            mysqli_close($conn);
         break;
-        
+
+        case "modify" :
+            $num = $_POST["NUMBER"];
+            $title  = $_POST["title"];
+            $content = $_POST["content"];
+            $query = "UPDATE board SET title = '$title',content= '$content' WHERE NUMBER = '$num'";
+            if(mysqli_query($conn,$query)){
+                echo '수정되었습니다.';
+            }else{
+                echo "Error: " . $query . "<br>" . mysqli_error($conn);
+            };
+            mysqli_close($conn);
+        break;
+
         case "delete" :
             $number = $_POST['NUMBER'];
             $query = "DELETE FROM board WHERE NUMBER='$number'";
@@ -46,10 +67,26 @@ if(isset($_GET["m"])){
     }
 
 }else{
-    $query = "SELECT * FROM board";
+    if(!isset($_GET['page'])){
+        $page = 0;        
+    }else{
+        $page = $_GET['page']-1;
+    };
+    $list = 5; // 나올 페이지 개수
+    $limit = $list * $page;
+    $data = mysqli_query($conn,"SELECT RN FROM board_view ORDER BY RN DESC");
+    $count = mysqli_num_rows($data); // 개시물 총 개수
+    $t_num = ceil($count / $list); // 하단 숫자 개수
+
+    if($page == 0){
+        $query = "SELECT * FROM board_view LIMIT $list";
+    }else{
+        $query = "SELECT * FROM board_view LIMIT $limit,$list";
+    }
     $result = mysqli_query($conn,$query);
     
-    $html ='<table border=\"1px\"><th>번호</th><th>제목</th><th>내용</th><th>작성자</th><th>날짜</th><th>조회수</th>';
+
+    $html ='<h1>게시판 목록</h1><table border="1px"><th>번호</th><th style="width:30%;">제목</th><th>내용</th><th>작성자</th><th>날짜</th><th>조회수</th>';
     while($row = mysqli_fetch_array($result)){
         $html .= "<tr>";
         $html .=    "<td>".$row['NUMBER']."</td>";
@@ -58,13 +95,26 @@ if(isset($_GET["m"])){
         $html .=    "<td>".$row['id']."</td>";
         $html .=    "<td>".$row['DATE']."</td>";
         $html .=    "<td>".$row['hit']."</td>";
-        $html .=    "<td><a href=\"boardmodify.html\">수정</a></td>";
-        // $html .=    "<td><button onclick=\"veiw_m(this)\" value=\"".$row['NUMBER']."\">수정</button></td>";
-        $html .=    "<td><button onclick=\"delete_btn(this)\" value=\"".$row['NUMBER']."\">삭제</button></td>";
+        $html .=    "<td><button onclick=\"veiw_m(this)\" value=\"".$row['NUMBER']."\">수정</button></td>";
+        $html .=    "<td><button onclick=\"delete_btn(this)\" value=\"".$row['NUMBER']."\">삭제</button></td>";        
         $html .= "</tr>";
     };
     $html .= "</table>";
+    $html .= "<div class=\"paging\">";
+    if($page!=0) $html .= "<a href=\"board.html\" style=\"margin-top: 17px; float: left;\">[처음]</a>";
+    $html .= "<ul>";
+    for($i=1;$i<= $t_num;$i++) {        
+        $html .= "<li><a href=\"board.html?page=".$i."\">".$i."</a></li>&emsp;";
+    }
+    $html .= "</ul>";
+    if($page+1 != $t_num) $html .= "<a href=\"board.html?page=".$t_num."\" style=\"margin-top: 17px; float: left;\">[마지막]</a>";
+    $html .= "</div><br><br><br>";
+    $html .= "<div class=\"footer\">";
+    $html .= "<a href=\"boardinsert.html\">글작성</a>&emsp;";
+    $html .= "<a href=\"mainpage.html\">뒤로가기</a>";
+    $html .= "</div>";
 }
+
 
 
 ?>
