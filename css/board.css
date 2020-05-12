@@ -1,8 +1,17 @@
 ul li{list-style-type: none; float: left;margin-left: 20px;}
 ul{float: left;}
 table {text-align: center;}
+.number_btn{ border: 0; outline: 0; background-color: transparent; text-decoration: underline; cursor: pointer;font-size: 15px;color: #551a8b;}
 
-
+/* .number_btn:link{
+    color: #0000ee;
+} */
+.number_btn:active{color: red;} 
+/* 
+.number_btn:visited{
+    color: #551a8b;
+} 
+*/
 
 
 /* ul {overflow: auto;} */

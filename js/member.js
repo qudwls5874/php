@@ -3,7 +3,7 @@ function login_btn(){
     var password = document.getElementById("password").value;
     $.ajax({
         type : "post",
-		url : "../database/id_check2.php",
+		url : "../database/member.php?m=login",
         data : {"id" : id,
                 "password" : password},
 		success : function(data){

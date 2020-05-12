@@ -23,6 +23,7 @@ if(isset($_GET["m"])){
         case "veiw" :
             $number = $_POST['NUMBER'];
             $view = $_POST['view'];
+            if($view === "view") mysqli_query($conn,"UPDATE board SET hit = hit+1 WHERE NUMBER = '$number'");
             $query = "SELECT * FROM board WHERE NUMBER='$number'";
             $result  = mysqli_query($conn,$query);
             $row = mysqli_fetch_array($result);
@@ -34,10 +35,21 @@ if(isset($_GET["m"])){
                 $html .= "<textarea id=\"content\" placeholder=\"내용\" value=\"".$row['content']."\">".$row['content']."</textarea><br>";
                 $html .= "<input type=\"submit\" onclick=\"modify()\" value=\"수정하기\">";
                 $html .= "</form><a href=\"board.html\">취소</a>";
-                // $html .= "</form><a href=\"board.html?page=".$page."\">닫기</a>";
-                echo $html;                
+                echo $html;                 
+            }else if($view === "view"){
+                include 'session.php' ;           
+                $html = "<input type=\"text\" id=\"title\" value=\"".$row['title']."\" readonly><br>";
+                $html .= "<input type=\"text\" id=\"id\" value=\"".$row['id']."\" readonly ><br>";
+                $html .= "<textarea id=\"content\" value=\"".$row['content']."\" readonly>".$row['content']."</textarea><br>";
+                $html .= "<form  method=\"POST\" onsubmit=\"return false\">";
+                $html .= "<input type=\"hidden\" id=\"session\" value=\"".$_SESSION['id']."\">";
+                $html .= "<input type=\"hidden\" id=\"number\" value=\"".$row['NUMBER']."\">";
+                $html .= "<input type=\"text\" id=\"comments\" placeholder=\"댓글 내용\">";
+                $html .= "<input type=\"submit\" onclick=\"com_insert()\" value=\"등록\"></form>";
+                echo $html;
             }else{
-                echo print_r($row) ;
+                $hit = $row['hit'];
+                echo $hit;
             }
             mysqli_close($conn);
         break;
@@ -86,17 +98,19 @@ if(isset($_GET["m"])){
     $result = mysqli_query($conn,$query);
     
 
-    $html ='<h1>게시판 목록</h1><table border="1px"><th>번호</th><th style="width:30%;">제목</th><th>내용</th><th>작성자</th><th>날짜</th><th>조회수</th>';
+    $html ='<h1>게시판 목록</h1><table border="1px"><th>번호</th><th style="width:15%;">제목</th><th style="width:30%;">내용</th><th>작성자</th><th>날짜</th><th>조회수</th>';
     while($row = mysqli_fetch_array($result)){
         $html .= "<tr>";
         $html .=    "<td>".$row['NUMBER']."</td>";
         $html .=    "<td>".$row['title']."</td>";
-        $html .=    "<td>".$row['content']."</td>";
+        $html .=    "<td><button class=\"number_btn\" onclick=\"veiw(this)\" value=\"".$row['NUMBER']."\">".$row['content']."</button></td>";
         $html .=    "<td>".$row['id']."</td>";
         $html .=    "<td>".$row['DATE']."</td>";
-        $html .=    "<td>".$row['hit']."</td>";
-        $html .=    "<td><button onclick=\"veiw_m(this)\" value=\"".$row['NUMBER']."\">수정</button></td>";
-        $html .=    "<td><button onclick=\"delete_btn(this)\" value=\"".$row['NUMBER']."\">삭제</button></td>";        
+        $html .=    "<td><a id=\"hit".$row['NUMBER']."\">".$row['hit']."</a></td>";     
+        if($_SESSION['id']===$row['id']){
+            $html .=    '<td><button onclick="veiw_m(this)" value='.$row['NUMBER'].'">수정</button></td>';     
+            $html .=    '<td><button onclick="delete_btn(this)" value="'.$row['NUMBER'].'">삭제</button></td>';     
+        }   
         $html .= "</tr>";
     };
     $html .= "</table>";

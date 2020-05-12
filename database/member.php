@@ -21,7 +21,7 @@ if(isset($_GET["m"])){
             
             mysqli_close($conn);
             echo '<script type="text/javascript">location.href = \'../main.html\';</script>';
-            break;
+        break;
 
 
         case "delete":
@@ -34,7 +34,7 @@ if(isset($_GET["m"])){
             session_unset();
             session_destroy();
             echo '<script type="text/javascript">location.href = \'../index.php\';</script>';
-            break;
+        break;
 
         case "out":
             include "session.php";
@@ -42,7 +42,30 @@ if(isset($_GET["m"])){
             session_destroy();
             header('location: ../index.php');
 
-            break;
+        break;
+        case "login":
+            $id = $_POST["id"];
+            $password = $_POST["password"];
+            if($password){
+                $query = "SELECT * FROM  member WHERE id = \"$id\"";
+                $result = mysqli_query($conn,$query);
+                $row = mysqli_fetch_array($result);
+                if($row){
+                    if($row['PASSWORD']== $password){
+                        session_start();
+                        $_SESSION["id"] = $id;
+                        echo "ok";
+                    }else{
+                        echo "비밀번호가 다릅니다.";
+                    }   
+                }else{
+                    echo "해당 id가 없습니다.";
+                }
+            }else{
+                echo "비밀번호를 입력해주세요.";
+            }
+            mysqli_close($conn);    
+        break;
 
         default:
           statement3;
