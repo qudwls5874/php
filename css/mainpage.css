@@ -1,0 +1,32 @@
+input#id {
+    background-color: whitesmoke;pointer-events: none;
+}
+input{text-align: center;}
+.center {
+    border: 2px solid;
+    width: 60%;
+    margin: auto;
+    padding-bottom: 10%;
+    margin-top: 5%;
+}
+
+h1 {
+    font-size: 55px;
+}
+
+.ss1{
+    text-align: center;
+}
+.ss2 {
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+h3 {
+    margin: auto;
+    margin-top: -35px;
+}
+
+.list4 {
+    text-align: center;
+}

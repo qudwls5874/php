@@ -6,25 +6,31 @@
     <title>Document</title>
     <script type="text/javascript" src="./js/memberjoin.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="css/memberjoin.css">
 </head>
 <body>
-    <h1>회원가입</h1>
-    <form action="./database/member.php?m=join" method="POST" name="joinForm" onsubmit="return false"><br>
-        <input type="text" name="id" placeholder="id" id="id" onkeyup="id_ck(this)" required>
-        <span id="id_ck_sp"></span><br>
-
-        <input type="password" name="password" placeholder="password" id="password" onkeyup="pw(this)" required>
-        <span id="pw_ck_sp"></span><br>
-        <input type="password" name="password2" placeholder="password2" onkeyup="pw_ck(this)" required>        
-        <span id="pw_ck_sp2"></span><br>
-        
-        <input type="text" name="name" placeholder="name" onkeyup="name_ck(this)" required>
-        <span id="name_ck_sp"></span><br>
-
-        <input type="text" name="phone" placeholder="phone"><br>
-        <input type="text" name="email" placeholder="email"><br>
-        <input type="submit" onclick="joinForm_ck()" value="가입하기">
-    </form>
-    <a href="main.html">취소</a>
+    <div class="center">
+        <h1>회원가입</h1>
+        <form action="./database/member.php?m=join" method="POST" name="joinForm" onsubmit="return false"><br>
+            <input class="input_text" type="text" name="id" placeholder="id" id="id" onkeyup="id_ck(this)" required>
+            <span id="id_ck_sp"></span><br>
+    
+            <input class="input_text" type="password" name="password" placeholder="password" id="password" onkeyup="pw(this)" required>
+            <span id="pw_ck_sp"></span><br>
+            <input class="input_text" type="password" name="password2" placeholder="password2" onkeyup="pw_ck(this)" required>        
+            <span id="pw_ck_sp2"></span><br>
+            
+            <input class="input_text" type="text" name="name" placeholder="name" onkeyup="name_ck(this)" required>
+            <span id="name_ck_sp"></span><br>
+    
+            <input class="input_text" type="text" name="phone" placeholder="phone"><br>
+            <input class="input_text" type="text" name="email" placeholder="email"><br>
+            <div class="btn">
+                <input type="submit" onclick="joinForm_ck()" value="가입하기">
+            </form>
+            <a class="cancel" href="main.html">취소</a>
+        </div>
+        <p>2020.05.19 hbj_php_project</p>
+    </div>
 </body>
 </html>

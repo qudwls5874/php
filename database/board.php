@@ -115,13 +115,13 @@ if(isset($_GET["m"])){
     };
     $html .= "</table>";
     $html .= "<div class=\"paging\">";
-    if($page!=0) $html .= "<a href=\"board.html\" style=\"margin-top: 17px; float: left;\">[처음]</a>";
     $html .= "<ul>";
+    if($page!=0) $html .= "<li><a href=\"board.html\">[처음]</a></li>";
     for($i=1;$i<= $t_num;$i++) {        
         $html .= "<li><a href=\"board.html?page=".$i."\">".$i."</a></li>&emsp;";
     }
+    if($page+1 != $t_num) $html .= "<li><a href=\"board.html?page=".$t_num."\">[마지막]</a></li>";
     $html .= "</ul>";
-    if($page+1 != $t_num) $html .= "<a href=\"board.html?page=".$t_num."\" style=\"margin-top: 17px; float: left;\">[마지막]</a>";
     $html .= "</div><br><br><br>";
     $html .= "<div class=\"footer\">";
     $html .= "<a href=\"boardinsert.html\">글작성</a>&emsp;";

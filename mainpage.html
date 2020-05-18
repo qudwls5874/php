@@ -9,14 +9,22 @@ if(!isset($_SESSION['id'])) header('location:index.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="./js/member.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="css/mainpage.css">
     <title>mainpage</title>
 </head>
-<body>    
-    <h1>MainPage</h1>
-    <h3><?= $_SESSION['id']; ?>님 반갑습니다.</h3><br>
-    <!-- <a href="./database/board.php?m=list">게시판 목록</a> -->
-    <a href="board.html">게시판 목록</a>
-    <a href="./database/member.php?m=out">로그아웃</a>
-    <button onclick="delete_btn(this)" value="<?= $_SESSION['id']; ?>">회원탈퇴</button>
+<body>
+    <div class="center">
+        <div class="ss1">
+            <h1>MainPage</h1>
+            <h3>(<?= $_SESSION['id']; ?>님 반갑습니다.)</h3><br>
+        </div>
+        <div class="ss2">
+            <button class="list1" onclick="view(this)" value="<?= $_SESSION['id']; ?>">내정보</button>
+            <a class="list2" href="board.html">게시판 목록</a>
+            <a class="list3" href="./database/member.php?m=out">로그아웃</a><br><br>
+        </div>
+        <span id="memberview"></span>
+    </div>
 </body>
 </html>

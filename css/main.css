@@ -1,0 +1,26 @@
+.login {text-align: center;margin-top: 5%;}
+h1 {text-align: center;margin-top: 5%;}
+.btn {margin-top: 2%;margin-bottom: 5%;}
+
+input {text-align: center;border-radius: 3px;height: 20px; border-style: solid;}
+input#password {margin-top: 10px;margin-bottom: 10px;}
+
+.sub_btn{background-color: black;color: white;border-radius: 7px;text-decoration: none;height: 31px;width: 65px;cursor: pointer;}
+.join_btn {background-color: black; color: white;border-radius: 5px;text-decoration: none;height: 30px;font-size: 13px;padding: 5px;}
+
+.center{
+    border: 2px solid black;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    background-color: white;
+}
+p {
+    text-align: end;
+    font-size: 9px;
+    margin-right: 5%;
+}
+html {
+    background-color: whitesmoke;
+}

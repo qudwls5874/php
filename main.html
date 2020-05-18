@@ -5,15 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <script type="text/javascript" src="./js/member.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
     <title>회원제 게시판</title>
 </head>
 <body>
-    <!-- <form action="./database/login.php" method="POST"> -->
-    <form action="" method="POST"></form>
-        <input type="text" name="id" id="id" placeholder="id"  >
-        <input type="password" name="password" id="password" placeholder="password" ><br>
-        <input type="submit" value="로그인" onclick="login_btn()">
-    </form>
-    <a href="memberjoin.html">회원가입</a>
+    <div class="center">
+        <h1>PHP Project</h1>
+        <div class="login">
+            <!-- <form action="./database/login.php" method="POST"> -->
+            <input type="text" name="id" id="id" placeholder="id"  ><br>
+            <input type="password" name="password" id="password" placeholder="password" ><br>
+            <div class="btn">
+                <input class="sub_btn" type="submit" value="로그인" onclick="login_btn()">
+                <a class="join_btn" href="memberjoin.html">회원가입</a>
+            </div>
+        </div>
+        <p>2020.05.19 hbj_php_project</p>
+    </div>
 </body>
 </html>
